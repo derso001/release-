@@ -53,7 +53,25 @@ document.addEventListener('DOMContentLoaded', () => {
         `
     }
 
-    function addToCart(productId) {
+    function getJsonCookie(cookieName) {
+        const allCookies = document.cookie.split('; ');
+        const targetCookie = allCookies.find(row => row.startsWith(cookieName +
+        '='));
+        if (targetCookie) {
+        const encodedData = targetCookie.split('=')[1];
+        return JSON.parse(decodeURIComponent(encodedData));
+        }
+        return null;
+        }
+
+    function saveJsonCookie(cookieName, data, seconds) {
+            const jsonString = JSON.stringify(data);
+            const safeString = encodeURIComponent(jsonString);
+            document.cookie = `${cookieName}=${safeString}; max-age=${seconds};
+            path=/`;
+            }
+
+    window.addToCart = function (productId) {
     
         const product = products.find(p => p.id === productId);
     
@@ -66,16 +84,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         console.log(cart);
 
-        saveJsonCookies('cart', cart, 3600 * 24 * 7);
+        saveJsonCookie('cart', cart, 3600 * 24 * 7);
+
+        console.log('Product added to cart:', product.title);
     }
 
     function loadCart() {
-        const savedCart = getJsonCookies('cart');
+        const savedCart = getJsonCookie('cart');
         if (savedCart != null) {
             cart = savedCart;
             console.log(cart);
         }
     }
 
+    
 });   
 
