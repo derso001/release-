@@ -23,7 +23,7 @@
         <h1 class="name">Manga Shop</h1>
         <div class="menu">
             <ul class="nav">
-                <li><a href="#">Главная</a></li>
+                <li><a href="index.html">Главная</a></li>
                 <li><a href="#">Услуги</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
@@ -60,9 +60,18 @@
     </header>
     <main>
 
-        <div class = "cards">
-            
-        </div>
+        <div class="card-body p-0" id="cartItems">
+            <div id="cart-container"></div>
+            <!-- Товари будуть додані через JS -->
+      </div>    
+      <button class="clear">Clear</button>  
+
+      <form id="orderForm" method="POST">
+        <input type="text" id="userName" placeholder="Ваше ім'я">
+        <input type="tel" id="userPhone" placeholder="Телефон">
+        <button type="submit">Підтвердити </button>
+      </form>
+      
 
     </main>
     <footer>
@@ -76,6 +85,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="js/card.js"></script>
 
 </body>
 
